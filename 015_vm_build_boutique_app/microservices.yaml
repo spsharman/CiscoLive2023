@@ -1,0 +1,254 @@
+
+--- 
+cartservice: 
+  dns_server_list: 
+    - "10.237.97.134"
+    - "10.237.97.135"
+  dns_suffix_list: 
+    - uktme.cisco.com
+  domain: uktme.cisco.com
+  ipv4_address: "10.0.72.57"
+  ipv4_gateway: "10.0.72.1"
+  ipv4_netmask: 24
+  mem_gb: 16384
+  num_cpus: 2
+  tag_catagory_name: Function
+  tag_name: tn-ssharman-online-boutique-cart-service
+  vm_folder: rwhitear/CentOS/Boutique
+  vm_hostname: cartservice
+  vm_name: cartservice
+  vm_template_name: CentOS-8-Template-vsanDatastore
+  vsphere_cluster: ucsc-c220-m5sx
+  vsphere_datacenter: UKTME
+  vsphere_datastore: vsanDatastore
+  vsphere_network: ciscolive-07|network-segments|10.0.72.0_24
+
+redis-cart: 
+  dns_server_list: 
+    - "10.237.97.134"
+    - "10.237.97.135"
+  dns_suffix_list: 
+    - uktme.cisco.com
+  domain: uktme.cisco.com
+  ipv4_address: "10.0.73.67"
+  ipv4_gateway: "10.0.73.1"
+  ipv4_netmask: 24
+  mem_gb: 16384
+  num_cpus: 2
+  tag_catagory_name: Function
+  tag_name: tn-ssharman-online-boutique-redis-database
+  vm_folder: rwhitear/CentOS/Boutique
+  vm_hostname: redis-cart
+  vm_name: redis-cart
+  vm_template_name: CentOS-8-Template-vsanDatastore
+  vsphere_cluster: ucsc-c220-m5sx
+  vsphere_datacenter: UKTME
+  vsphere_datastore: vsanDatastore
+  vsphere_network: ciscolive-07|network-segments|10.0.73.0_24
+
+shippingservice: 
+  dns_server_list: 
+    - "10.237.97.134"
+    - "10.237.97.135"
+  dns_suffix_list: 
+    - uktme.cisco.com
+  domain: uktme.cisco.com
+  ipv4_address: "10.0.72.58"
+  ipv4_gateway: "10.0.72.1"
+  ipv4_netmask: 24
+  mem_gb: 16384
+  num_cpus: 2
+  tag_catagory_name: Function
+  tag_name: tn-ssharman-online-boutique-shipping-service
+  vm_folder: rwhitear/CentOS/Boutique
+  vm_hostname: shippingservice
+  vm_name: shippingservice
+  vm_template_name: CentOS-8-Template-vsanDatastore
+  vsphere_cluster: ucsc-c220-m5sx
+  vsphere_datacenter: UKTME
+  vsphere_datastore: vsanDatastore
+  vsphere_network: ciscolive-07|network-segments|10.0.72.0_24
+
+emailservice: 
+  dns_server_list: 
+    - "10.237.97.134"
+    - "10.237.97.135"
+  dns_suffix_list: 
+    - uktme.cisco.com
+  domain: uktme.cisco.com
+  ipv4_address: "10.0.72.59"
+  ipv4_gateway: "10.0.72.1"
+  ipv4_netmask: 24
+  mem_gb: 16384
+  num_cpus: 2
+  tag_catagory_name: Function
+  tag_name: tn-ssharman-online-boutique-email-service
+  vm_folder: rwhitear/CentOS/Boutique
+  vm_hostname: emailservice
+  vm_name: emailservice
+  vm_template_name: CentOS-8-Template-vsanDatastore
+  vsphere_cluster: ucsc-c220-m5sx
+  vsphere_datacenter: UKTME
+  vsphere_datastore: vsanDatastore
+  vsphere_network: ciscolive-07|network-segments|10.0.72.0_24
+
+currencyservice: 
+  dns_server_list: 
+    - "10.237.97.134"
+    - "10.237.97.135"
+  dns_suffix_list: 
+    - uktme.cisco.com
+  domain: uktme.cisco.com
+  ipv4_address: "10.0.72.60"
+  ipv4_gateway: "10.0.72.1"
+  ipv4_netmask: 24
+  mem_gb: 16384
+  num_cpus: 2
+  tag_catagory_name: Function
+  tag_name: tn-ssharman-online-boutique-currency-service
+  vm_folder: rwhitear/CentOS/Boutique
+  vm_hostname: currencyservice
+  vm_name: currencyservice
+  vm_template_name: CentOS-8-Template-vsanDatastore
+  vsphere_cluster: ucsc-c220-m5sx
+  vsphere_datacenter: UKTME
+  vsphere_datastore: vsanDatastore
+  vsphere_network: ciscolive-07|network-segments|10.0.72.0_24
+
+productcatalogservice: 
+  dns_server_list: 
+    - "10.237.97.134"
+    - "10.237.97.135"
+  dns_suffix_list: 
+    - uktme.cisco.com
+  domain: uktme.cisco.com
+  ipv4_address: "10.0.72.61"
+  ipv4_gateway: "10.0.72.1"
+  ipv4_netmask: 24
+  mem_gb: 16384
+  num_cpus: 2
+  tag_catagory_name: Function
+  tag_name: tn-ssharman-online-boutique-product-catalogue-service
+  vm_folder: rwhitear/CentOS/Boutique
+  vm_hostname: productcatalogservice
+  vm_name: productcatalogservice
+  vm_template_name: CentOS-8-Template-vsanDatastore
+  vsphere_cluster: ucsc-c220-m5sx
+  vsphere_datacenter: UKTME
+  vsphere_datastore: vsanDatastore
+  vsphere_network: ciscolive-07|network-segments|10.0.72.0_24
+
+checkoutservice: 
+  dns_server_list: 
+    - "10.237.97.134"
+    - "10.237.97.135"
+  dns_suffix_list: 
+    - uktme.cisco.com
+  domain: uktme.cisco.com
+  ipv4_address: "10.0.72.62"
+  ipv4_gateway: "10.0.72.1"
+  ipv4_netmask: 24
+  mem_gb: 16384
+  num_cpus: 2
+  tag_catagory_name: Function
+  tag_name: tn-ssharman-online-boutique-checkout-service
+  vm_folder: rwhitear/CentOS/Boutique
+  vm_hostname: checkoutservice
+  vm_name: checkoutservice
+  vm_template_name: CentOS-8-Template-vsanDatastore
+  vsphere_cluster: ucsc-c220-m5sx
+  vsphere_datacenter: UKTME
+  vsphere_datastore: vsanDatastore
+  vsphere_network: ciscolive-07|network-segments|10.0.72.0_24
+
+paymentservice: 
+  dns_server_list: 
+    - "10.237.97.134"
+    - "10.237.97.135"
+  dns_suffix_list: 
+    - uktme.cisco.com
+  domain: uktme.cisco.com
+  ipv4_address: "10.0.72.63"
+  ipv4_gateway: "10.0.72.1"
+  ipv4_netmask: 24
+  mem_gb: 16384
+  num_cpus: 2
+  tag_catagory_name: Function
+  tag_name: tn-ssharman-online-boutique-payment-service
+  vm_folder: rwhitear/CentOS/Boutique
+  vm_hostname: paymentservice
+  vm_name: paymentservice
+  vm_template_name: CentOS-8-Template-vsanDatastore
+  vsphere_cluster: ucsc-c220-m5sx
+  vsphere_datacenter: UKTME
+  vsphere_datastore: vsanDatastore
+  vsphere_network: ciscolive-07|network-segments|10.0.72.0_24
+
+adservice: 
+  dns_server_list: 
+    - "10.237.97.134"
+    - "10.237.97.135"
+  dns_suffix_list: 
+    - uktme.cisco.com
+  domain: uktme.cisco.com
+  ipv4_address: "10.0.72.64"
+  ipv4_gateway: "10.0.72.1"
+  ipv4_netmask: 24
+  mem_gb: 16384
+  num_cpus: 2
+  tag_catagory_name: Function
+  tag_name: tn-ssharman-online-boutique-ad-service
+  vm_folder: rwhitear/CentOS/Boutique
+  vm_hostname: adservice
+  vm_name: adservice
+  vm_template_name: CentOS-8-Template-vsanDatastore
+  vsphere_cluster: ucsc-c220-m5sx
+  vsphere_datacenter: UKTME
+  vsphere_datastore: vsanDatastore
+  vsphere_network: ciscolive-07|network-segments|10.0.72.0_24
+
+frontend: 
+  dns_server_list: 
+    - "10.237.97.134"
+    - "10.237.97.135"
+  dns_suffix_list: 
+    - uktme.cisco.com
+  domain: uktme.cisco.com
+  ipv4_address: "10.0.71.65"
+  ipv4_gateway: "10.0.71.1"
+  ipv4_netmask: 24
+  mem_gb: 16384
+  num_cpus: 2
+  tag_catagory_name: Function
+  tag_name: tn-ssharman-online-boutique-frontend-service
+  vm_folder: rwhitear/CentOS/Boutique
+  vm_hostname: frontend
+  vm_name: frontend
+  vm_template_name: CentOS-8-Template-vsanDatastore
+  vsphere_cluster: ucsc-c220-m5sx
+  vsphere_datacenter: UKTME
+  vsphere_datastore: vsanDatastore
+  vsphere_network: ciscolive-07|network-segments|10.0.71.0_24
+
+recommendationservice: 
+  dns_server_list: 
+    - "10.237.97.134"
+    - "10.237.97.135"
+  dns_suffix_list: 
+    - uktme.cisco.com
+  domain: uktme.cisco.com
+  ipv4_address: "10.0.72.66"
+  ipv4_gateway: "10.0.72.1"
+  ipv4_netmask: 24
+  mem_gb: 16384
+  num_cpus: 2
+  tag_catagory_name: Function
+  tag_name: tn-ssharman-online-boutique-recommendation-service
+  vm_folder: rwhitear/CentOS/Boutique
+  vm_hostname: recommendationservice
+  vm_name: recommendationservice
+  vm_template_name: CentOS-8-Template-vsanDatastore
+  vsphere_cluster: ucsc-c220-m5sx
+  vsphere_datacenter: UKTME
+  vsphere_datastore: vsanDatastore
+  vsphere_network: ciscolive-07|network-segments|10.0.72.0_24
