@@ -1,0 +1,3 @@
+apic_ip: <APIC_IP>
+apic_username: <APIC_USERNAME>
+apic_password: <APIC_PASSWORD>

@@ -1,0 +1,19 @@
+- hosts: apic_uktme_dev
+  vars_prompt:
+  - name: snapshot_description
+    prompt: "APIC Snapshot Description: "
+    private: false
+  gather_facts: False
+  tasks:
+  - include_vars: vars.yml
+
+  - name: Create a Snapshot
+    cisco.aci.aci_config_snapshot:
+      host: "{{ apic_ip }}"
+      username: "{{ apic_username }}"
+      password: "{{ apic_password }}"
+      validate_certs: false
+      state: present
+      description: "{{ snapshot_description }}"
+      export_policy: defaultOneTime
+    delegate_to: localhost
