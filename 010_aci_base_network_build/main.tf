@@ -75,15 +75,30 @@ module "create_epg" {
 resource "aci_filter" "permit_any_filter" {
     tenant_dn   = aci_tenant.aci_tenant.id
     description = "Automated by Terraform"
-    name        = local.model.tenant.contracts[0].filter.name
+    name        = local.model.tenant.contracts[0].filters.permit_any.name
 }
 
 resource "aci_filter_entry" "permit_any_filter_entry" {
     filter_dn     = aci_filter.permit_any_filter.id
     description   = "Automated by Terraform"
-    name          = local.model.tenant.contracts[0].filter.filter_entry.name
-    d_from_port   = local.model.tenant.contracts[0].filter.filter_entry.d_from_port
-    d_to_port     = local.model.tenant.contracts[0].filter.filter_entry.d_to_port
+    name          = local.model.tenant.contracts[0].filters.permit_any.filter_entry.name
+    d_from_port   = local.model.tenant.contracts[0].filters.permit_any.filter_entry.d_from_port
+    d_to_port     = local.model.tenant.contracts[0].filters.permit_any.filter_entry.d_to_port
+}
+
+## Permit ICMP ##
+resource "aci_filter" "permit_icmp_filter" {
+    tenant_dn   = aci_tenant.aci_tenant.id
+    description = "Automated by Terraform"
+    name        = local.model.tenant.contracts[0].filters.permit_icmp.name
+}
+
+resource "aci_filter_entry" "permit_icmp_filter_entry" {
+    filter_dn     = aci_filter.permit_icmp_filter.id
+    description   = "Automated by Terraform"
+    name          = local.model.tenant.contracts[0].filters.permit_icmp.filter_entry.name
+    ether_t       = local.model.tenant.contracts[0].filters.permit_icmp.filter_entry.ether_t
+    prot          = local.model.tenant.contracts[0].filters.permit_icmp.filter_entry.prot
 }
 
 resource "aci_contract" "permit_any_contract" {
@@ -96,7 +111,7 @@ resource "aci_contract" "permit_any_contract" {
 resource "aci_contract_subject" "permit_any_contract_subject" {
     contract_dn   = aci_contract.permit_any_contract.id
     description   = "Automated by Terraform"
-    name          = local.model.tenant.contracts[0].subject.name
+    name          = local.model.tenant.contracts[0].subjects.permit_any.name
 }
 
 resource "aci_contract_subject_filter" "permit_any_contract_subject_filter" {
@@ -104,23 +119,33 @@ resource "aci_contract_subject_filter" "permit_any_contract_subject_filter" {
   filter_dn  = aci_filter.permit_any_filter.id
 }
 
+resource "aci_contract_subject" "permit_icmp_contract_subject" {
+    contract_dn   = aci_contract.permit_any_contract.id
+    description   = "Automated by Terraform"
+    name          = local.model.tenant.contracts[0].subjects.permit_icmp.name
+}
 
-## permit-to-tn-ciscolive-07 ##
-resource "aci_contract" "permit-to-tn-ciscolive-07_contract" {
+resource "aci_contract_subject_filter" "permit_icmp_contract_subject_filter" {
+  contract_subject_dn  = aci_contract_subject.permit_icmp_contract_subject.id
+  filter_dn  = aci_filter.permit_icmp_filter.id
+}
+
+## permit-to-tenant ##
+resource "aci_contract" "permit_to_tenant_contract" {
     tenant_dn   =  aci_tenant.aci_tenant.id
     description = "Automated by Terraform"
     name        = local.model.tenant.contracts[1].name
     scope       = local.model.tenant.contracts[1].scope
 }
 
-resource "aci_contract_subject" "permit-to-tn-ciscolive-07_contract_subject" {
-    contract_dn   = aci_contract.permit-to-tn-ciscolive-07_contract.id
+resource "aci_contract_subject" "permit_to_tenant_contract_subject" {
+    contract_dn   = aci_contract.permit_to_tenant_contract.id
     description   = "Automated by Terraform"
     name          = local.model.tenant.contracts[1].subject.name
 }
 
-resource "aci_contract_subject_filter" "permit-to-tn-ciscolive-07_contract_subject_filter" {
-  contract_subject_dn  = aci_contract_subject.permit-to-tn-ciscolive-07_contract_subject.id
+resource "aci_contract_subject_filter" "permit_to_tenant_contract_subject_filter" {
+  contract_subject_dn  = aci_contract_subject.permit_to_tenant_contract_subject.id
   filter_dn  = aci_filter.permit_any_filter.id
 }
 
@@ -129,7 +154,7 @@ resource "aci_imported_contract" "exported_contract" {
   tenant_dn   = data.aci_tenant.shared_services_tenant.id
   name        = local.model.tenant.contracts[1].name
   description = "Automated by Terraform"
-  relation_vz_rs_if = aci_contract.permit-to-tn-ciscolive-07_contract.id
+  relation_vz_rs_if = aci_contract.permit_to_tenant_contract.id
 }
 
 
@@ -166,31 +191,6 @@ resource "aci_rest_managed" "leakInternalSubnet" {
     content = {
       tenantName = data.aci_tenant.shared_services_tenant.name
       ctxName = data.aci_vrf.shared_services_vrf.name
-    }
-  }
-
-  depends_on = [
-    aci_rest_managed.leakRoutes
-  ]
-}
-
-resource "aci_rest_managed" "leakInternalSubnet_tn-rwhitear" {
-  count = length(local.model.tenant.bridge_domain)
-
-  dn         = "${aci_tenant.aci_tenant.id}/ctx-${aci_vrf.aci_vrf.name}/leakroutes/leakintsubnet-[${local.model.tenant.bridge_domain[count.index].vrf_leak_routes_epg_bd_subnet}]"
-  class_name = "leakInternalSubnet"
-  content = {
-    ip  = local.model.tenant.bridge_domain[count.index].vrf_leak_routes_epg_bd_subnet
-    scope = "public"
-  }
-
-  child {
-    rn = "to-[rwhitear]-[vrf-01]"
-    class_name = "leakTo"
-    content = {
-      tenantName = "rwhitear"
-      ctxName = "vrf-01"
-      scope = "public"
     }
   }
 
