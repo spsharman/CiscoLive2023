@@ -1,58 +1,90 @@
 locals {
   model = {
     tenant = {
-      name = "ciscolive-07"
-      description = "Routable IP range 10.0.71-75.x"
+      name = var.TENANT_NAME
+      description = "Routable IP range 192.168.150-156.x"
       vrf  = "vrf-01"
       bridge_domain = [
         {
-          name   = "10.0.71.0_24"
-          subnet = "10.0.71.1/24"
-          vrf_leak_routes_epg_bd_subnet = "10.0.71.0/24"
+          name   = "192.168.150.0_24"
+          subnet = "192.168.150.1/24"
+          vrf_leak_routes_epg_bd_subnet = "192.168.150.0/24"
+          dhcp_label_name = "dhcp.uktme.cisco.com"
         },
         {
-          name   = "10.0.72.0_24"
-          subnet = "10.0.72.1/24"
-          vrf_leak_routes_epg_bd_subnet = "10.0.72.0/24"
+          name   = "192.168.151.0_24"
+          subnet = "192.168.151.1/24"
+          vrf_leak_routes_epg_bd_subnet = "192.168.151.0/24"
+          dhcp_label_name = "dhcp.uktme.cisco.com"
         },
         {
-          name   = "10.0.73.0_24"
-          subnet = "10.0.73.1/24"
-          vrf_leak_routes_epg_bd_subnet = "10.0.73.0/24"
+          name   = "192.168.152.0_24"
+          subnet = "192.168.152.1/24"
+          vrf_leak_routes_epg_bd_subnet = "192.168.152.0/24"
+          dhcp_label_name = "dhcp.uktme.cisco.com"
         },
         {
-          name   = "10.0.74.0_24"
-          subnet = "10.0.74.1/24"
-          vrf_leak_routes_epg_bd_subnet = "10.0.74.0/24"
+          name   = "192.168.153.0_24"
+          subnet = "192.168.153.1/24"
+          vrf_leak_routes_epg_bd_subnet = "192.168.153.0/24"
+          dhcp_label_name = "dhcp.uktme.cisco.com"
         },
         {
-          name   = "10.0.75.0_24"
-          subnet = "10.0.75.1/24"
-          vrf_leak_routes_epg_bd_subnet = "10.0.75.0/24"
+          name   = "192.168.154.0_24"
+          subnet = "192.168.154.1/24"
+          vrf_leak_routes_epg_bd_subnet = "192.168.154.0/24"
+          dhcp_label_name = "dhcp.uktme.cisco.com"
+        },
+        {
+          name   = "192.168.155.0_24"
+          subnet = "192.168.155.1/24"
+          vrf_leak_routes_epg_bd_subnet = "192.168.155.0/24"
+          dhcp_label_name = "dhcp.uktme.cisco.com"
+        },
+        {
+          name   = "192.168.156.0_24"
+          subnet = "192.168.156.1/24"
+          vrf_leak_routes_epg_bd_subnet = "192.168.156.0/24"
+          dhcp_label_name = "dhcp.uktme.cisco.com"
         }
       ]
       app_profile = {
         name = "network-segments"
         epg = [
           {
-            name = "10.0.71.0_24"
-            bd_name = "10.0.71.0_24"
+            name = "192.168.150.0_24"
+            bd_name = "192.168.150.0_24"
+            vmm_domain_name = "ucsc-c220m5-vds-01"
           },
           {
-            name = "10.0.72.0_24"
-            bd_name = "10.0.72.0_24"
+            name = "192.168.151.0_24"
+            bd_name = "192.168.151.0_24"
+            vmm_domain_name = "ucsc-c220m5-vds-01"
           },
           {
-            name = "10.0.73.0_24"
-            bd_name = "10.0.73.0_24"
+            name = "192.168.152.0_24"
+            bd_name = "192.168.152.0_24"
+            vmm_domain_name = "ucsc-c220m5-vds-01"
           },
           {
-            name = "10.0.74.0_24"
-            bd_name = "10.0.74.0_24"
+            name = "192.168.153.0_24"
+            bd_name = "192.168.153.0_24"
+            vmm_domain_name = "ucsc-c220m5-vds-01"
           },
           {
-            name = "10.0.75.0_24"
-            bd_name = "10.0.75.0_24"
+            name = "192.168.154.0_24"
+            bd_name = "192.168.154.0_24"
+            vmm_domain_name = "ucsc-c220m5-vds-01"
+          },
+          {
+            name = "192.168.155.0_24"
+            bd_name = "192.168.155.0_24"
+            vmm_domain_name = "ucsc-c220m5-vds-01"
+          },
+          {
+            name = "192.168.156.0_24"
+            bd_name = "192.168.156.0_24"
+            vmm_domain_name = "ucsc-c220m5-vds-01"
           }
         ]
       }
@@ -60,20 +92,36 @@ locals {
         {
           name = "permit-any"
           scope = "context"
-          subject = {
-            name = "permit-any"
+          subjects = {
+            permit_any = {
+              name = "permit-any"
+            }
+            permit_icmp = {
+              name = "permit-icmp"
+            }
           }
-          filter = {
-            name = "permit-any"
-            filter_entry = {
-              name        = "unspecified"
-              d_from_port = "unspecified"
-              d_to_port   = "unspecified"
+          filters = {
+            permit_any = {
+              name = "permit-any"
+              filter_entry = {
+                name        = "unspecified"
+                d_from_port = "unspecified"
+                d_to_port   = "unspecified"
+              }
+            }
+            permit_icmp = {
+              name = "permit-icmp"
+              filter_entry = {
+                name        = "icmp"
+                ether_t     = "ip"
+                prot        = "icmp"
+              }
             }
           }
         },
         {
-          name = "permit-to-tn-ciscolive-07"
+          # name = "permit-to-tn-demo"
+          name = "permit-to-tn-${var.TENANT_NAME}"
           scope = "global"
           subject = {
             name = "permit-any"

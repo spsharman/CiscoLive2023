@@ -1,4 +1,5 @@
 apic_user     = "myApicUser"
 apic_password = "myApicPassword"
 apic_ip       = "https://<APIC_IP>"
+TENANT_NAME   = "DEMO"
 
