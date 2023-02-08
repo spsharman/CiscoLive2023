@@ -9,3 +9,7 @@ variable "apic_password" {
 variable "apic_ip" {
   type = string
 }
+
+variable "TENANT_NAME" {
+  type = string
+}
