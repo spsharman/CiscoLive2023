@@ -3,7 +3,7 @@
 ##################################################################
 data "aci_contract" "tn_shared_services_permit_to_core_services" {
   tenant_dn  = data.aci_tenant.shared_services_tenant.id
-  name       = local.model.shared_services_tenant_contracts[0].name
+  name       = local.model.data_resource.shared_services_tenant.contracts[0].name
 }
 
 ##########################################################
@@ -11,7 +11,7 @@ data "aci_contract" "tn_shared_services_permit_to_core_services" {
 ##########################################################
 resource "aci_imported_contract" "tn_shared_services_permit_to_core_services" {
   tenant_dn   = data.aci_tenant.user_tenant.id
-  name        = "permit-to-core-services"
+  name        = local.model.data_resource.shared_services_tenant.contracts[0].name
   description = "Automated by Terraform"
   relation_vz_rs_if = data.aci_contract.tn_shared_services_permit_to_core_services.id
 }
@@ -36,7 +36,7 @@ resource "aci_rest_managed" "add_permit_to_core_services_cci_to_vzany" {
 ####################################################################
 data "aci_contract" "tn_shared_services_permit_from_core_services" {
   tenant_dn  = data.aci_tenant.shared_services_tenant.id
-  name       = local.model.shared_services_tenant_contracts[1].name
+  name       = local.model.data_resource.shared_services_tenant.contracts[1].name
 }
 
 ############################################################
@@ -44,7 +44,7 @@ data "aci_contract" "tn_shared_services_permit_from_core_services" {
 ############################################################
 resource "aci_imported_contract" "tn_shared_services_permit_from_core_services" {
   tenant_dn   = data.aci_tenant.user_tenant.id
-  name        = "permit-from-core-services"
+  name        = local.model.data_resource.shared_services_tenant.contracts[1].name
   description = "Automated by Terraform"
   relation_vz_rs_if = data.aci_contract.tn_shared_services_permit_from_core_services.id
 }
@@ -69,7 +69,7 @@ resource "aci_rest_managed" "add_permit_from_core_services_cci_to_vzany" {
 ####################################################################
 data "aci_contract" "tn_shared_services_permit_from_lab_desktops" {
   tenant_dn  = data.aci_tenant.shared_services_tenant.id
-  name       = local.model.shared_services_tenant_contracts[1].name
+  name       = local.model.data_resource.shared_services_tenant.contracts[2].name
 }
 
 ############################################################
@@ -77,7 +77,7 @@ data "aci_contract" "tn_shared_services_permit_from_lab_desktops" {
 ############################################################
 resource "aci_imported_contract" "tn_shared_services_permit_from_lab_desktops" {
   tenant_dn   = data.aci_tenant.user_tenant.id
-  name        = "permit-from-lab-desktops"
+  name        = local.model.data_resource.shared_services_tenant.contracts[2].name
   description = "Automated by Terraform"
   relation_vz_rs_if = data.aci_contract.tn_shared_services_permit_from_lab_desktops.id
 }
