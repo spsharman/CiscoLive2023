@@ -1,32 +1,15 @@
-###############################
-# Filters
-###############################
-
-## Permit ICMP ##
-resource "aci_filter" "permit_icmp_filter" {
+## Permit to 80 (http) ##
+resource "aci_filter" "tcp_src_any_dst_80_filter" {
     tenant_dn   = data.aci_tenant.user_tenant.id
     description = "Automated by Terraform"
-    name        = "permit-icmp"
+    name        = local.managed.filters.tcp_src_any_dst_80_filter.name
 }
-resource "aci_filter_entry" "permit_icmp_filter_entry" {
-    filter_dn     = aci_filter.permit_icmp_filter.id
+resource "aci_filter_entry" "tcp_src_any_dst_80_filter_entry" {
+    filter_dn     = aci_filter.tcp_src_any_dst_80_filter.id
     description   = "Automated by Terraform"
-    name          = "icmp"
-    ether_t       = "ip"
-    prot          = "icmp"
+    name          = local.managed.filter_entries.tcp_src_any_dst_80_filter_entry.name
+    ether_t       = local.managed.filter_entries.tcp_src_any_dst_80_filter_entry.ether_t
+    prot          = local.managed.filter_entries.tcp_src_any_dst_80_filter_entry.prot
+    d_from_port   = local.managed.filter_entries.tcp_src_any_dst_80_filter_entry.d_from_port
+    d_to_port     = local.managed.filter_entries.tcp_src_any_dst_80_filter_entry.d_to_port
 }
-
-## Permit Any ##
-resource "aci_filter" "permit_any_filter" {
-    tenant_dn   = data.aci_tenant.user_tenant.id
-    description = "Automated by Terraform"
-    name        = "permit-any"
-}
-resource "aci_filter_entry" "permit_any_filter_entry" {
-    filter_dn     = aci_filter.permit_any_filter.id
-    description   = "Automated by Terraform"
-    name          = "unspecified"
-    d_from_port   = "unspecified"
-    d_to_port     = "unspecified"
-}
-

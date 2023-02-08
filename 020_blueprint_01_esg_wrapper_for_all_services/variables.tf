@@ -10,11 +10,7 @@ variable "apic_ip" {
   type = string
 }
 
-variable "prefix" {
+variable "TENANT_NAME" {
   type = string
 }
 
-variable "blueprint_id" {
-  type = string
-  default = "01"
-}
